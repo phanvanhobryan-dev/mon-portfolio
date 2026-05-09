@@ -467,8 +467,8 @@ function PageProfil({ isMobile, isTablet, navigate }) {
             <div style={{display:"flex", flexDirection:"column", gap:12}}>
               {[
                 {icon:"◉", label:"Localisation", value:"Paris, France"},
-                {icon:"◆", label:"Email", value:"bryan@email.com"},
-                {icon:"⬢", label:"LinkedIn", value:"linkedin.com/in/bryanphanvanho"},
+                {icon:"◆", label:"Email", value:"phanvanhobryan@gmail.com"},
+                {icon:"⬢", label:"LinkedIn", value:"https://www.linkedin.com/in/bryan-phan-van-ho-6bbb931b3/"},
                 {icon:"★", label:"Behance", value:"behance.net/bryanphv"},
               ].map((item) => (
                 <div key={item.label} style={{
