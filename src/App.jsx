@@ -452,7 +452,7 @@ function PageProfil({ isMobile, isTablet, navigate }) {
               marginBottom:32, position:"relative", overflow:"hidden",
             }}>
               <img
-                src="/bryan-profile.jpg"
+                src="/PP"
                 alt="Bryan Phan Van Ho"
                 style={{
                   width:"100%", height:"100%",
