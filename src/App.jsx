@@ -107,26 +107,53 @@ const FEATURED = [
   {
     id:1, title:"Canal+U", category:"Expérience interactive", year:"2025",
     image:"https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=800&q=80",
+    // ↓ Ajoute ici autant d'images que tu veux pour la galerie de ce projet
+    images:[
+      "https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=1200&q=85",
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=85",
+      "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200&q=85",
+      "https://images.unsplash.com/photo-1448375240586-882707db888b?w=1200&q=85",
+    ],
     tags:[{label:"3D",cat:"domain"},{label:"Unreal Engine 5",cat:"tool"},{label:"Direction artistique",cat:"domain"},{label:"Gestion de projet",cat:"domain"}],
     accent:"#FBBEB4", desc:"Environnement 3D immersif pour une marque cosmétique. 6 semaines, équipe de 5.",
+    role:"Lead Designer", team:"5 personnes", duration:"6 semaines",
   },
   {
     id:2, title:"Digital Event", category:"Plateforme SaaS", year:"2025",
     image:"https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+    images:[
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=85",
+      "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200&q=85",
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=85",
+    ],
     tags:[{label:"UI/UX",cat:"domain"},{label:"Figma",cat:"tool"},{label:"Stratégie produit",cat:"domain"},{label:"Gestion de projet",cat:"domain"}],
     accent:"#D4A574", desc:"Dashboard analytique pour artistes indépendants. 8 mois, lead d'une équipe de 12.",
+    role:"Project Lead", team:"12 personnes", duration:"8 mois",
   },
   {
     id:3, title:"Disney", category:"Application mobile", year:"2023",
     image:"https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&q=80",
+    images:[
+      "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=1200&q=85",
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200&q=85",
+      "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=1200&q=85",
+      "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1200&q=85",
+      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1200&q=85",
+    ],
     tags:[{label:"UI/UX",cat:"domain"},{label:"Motion design",cat:"domain"},{label:"Figma",cat:"tool"},{label:"After Effects",cat:"tool"}],
     accent:"#FBBEB4", desc:"App de méditation immersive avec sound design custom. Coordination de 5 personnes.",
+    role:"Product Designer", team:"5 personnes", duration:"4 mois",
   },
   {
     id:4, title:"Test", category:"Direction artistique", year:"2024",
     image:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+    images:[
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=85",
+      "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=1200&q=85",
+    ],
     tags:[{label:"Illustration",cat:"domain"},{label:"Print",cat:"domain"},{label:"Illustrator",cat:"tool"},{label:"InDesign",cat:"tool"}],
     accent:"#D4A574", desc:"Série de posters expérimentaux sur la perception géométrique.",
+    role:"Designer solo", team:"Solo", duration:"3 mois",
   },
 ];
 
@@ -866,51 +893,157 @@ function CornerOrnaments({ color=C.gold }) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// LIGHTBOX
+// ═══════════════════════════════════════════════════════════════════════════════
+function Lightbox({ images, startIndex, onClose }) {
+  const [current, setCurrent] = useState(startIndex);
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowRight") setCurrent(c => (c + 1) % images.length);
+      if (e.key === "ArrowLeft")  setCurrent(c => (c - 1 + images.length) % images.length);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [images.length, onClose]);
+
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position:"fixed", inset:0, zIndex:9000,
+        background:"rgba(11,13,26,0.96)",
+        backdropFilter:"blur(20px)",
+        display:"flex", alignItems:"center", justifyContent:"center",
+        animation:"fadeIn .25s ease both",
+      }}
+    >
+      {/* Image */}
+      <img
+        src={images[current]}
+        alt=""
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          maxWidth:"88vw", maxHeight:"85vh",
+          objectFit:"contain",
+          borderRadius:6,
+          boxShadow:"0 32px 80px rgba(0,0,0,0.7)",
+          animation:"fadeUp .3s ease both",
+        }}
+      />
+
+      {/* Fermer */}
+      <button
+        onClick={onClose}
+        style={{
+          position:"fixed", top:24, right:32,
+          background:"transparent", border:"none",
+          color:C.peach, fontSize:28, lineHeight:1,
+          fontFamily:FONT_BODY, fontWeight:300, opacity:0.7,
+        }}
+      >
+        ✕
+      </button>
+
+      {/* Navigation gauche/droite */}
+      {images.length > 1 && <>
+        <button
+          onClick={(e)=>{e.stopPropagation(); setCurrent(c=>(c-1+images.length)%images.length);}}
+          style={{
+            position:"fixed", left:24, top:"50%", transform:"translateY(-50%)",
+            background:"rgba(26,31,56,0.7)", border:`1px solid ${C.border}`,
+            borderRadius:4, color:C.peach, fontSize:20,
+            width:48, height:48, display:"flex", alignItems:"center", justifyContent:"center",
+            backdropFilter:"blur(12px)",
+          }}
+        >←</button>
+        <button
+          onClick={(e)=>{e.stopPropagation(); setCurrent(c=>(c+1)%images.length);}}
+          style={{
+            position:"fixed", right:24, top:"50%", transform:"translateY(-50%)",
+            background:"rgba(26,31,56,0.7)", border:`1px solid ${C.border}`,
+            borderRadius:4, color:C.peach, fontSize:20,
+            width:48, height:48, display:"flex", alignItems:"center", justifyContent:"center",
+            backdropFilter:"blur(12px)",
+          }}
+        >→</button>
+      </>}
+
+      {/* Compteur + pastilles */}
+      <div style={{
+        position:"fixed", bottom:28, left:"50%", transform:"translateX(-50%)",
+        display:"flex", flexDirection:"column", alignItems:"center", gap:10,
+      }}>
+        <div style={{display:"flex", gap:6}}>
+          {images.map((_, i) => (
+            <button
+              key={i}
+              onClick={(e)=>{e.stopPropagation(); setCurrent(i);}}
+              style={{
+                width: i === current ? 20 : 6,
+                height:6,
+                borderRadius:3,
+                background: i === current ? C.gold : "rgba(251,190,180,0.35)",
+                border:"none",
+                transition:"all .2s ease",
+              }}
+            />
+          ))}
+        </div>
+        <span style={{fontFamily:FONT_BODY, fontSize:11, color:"rgba(251,190,180,0.5)", letterSpacing:2}}>
+          {current + 1} / {images.length}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // PAGE PROJET DÉTAILLÉE
 // ═══════════════════════════════════════════════════════════════════════════════
 function PageProjet({ project: p, isMobile, isTablet, navigate }) {
+  const [lightbox, setLightbox] = useState(null); // index image ouverte, null = fermée
   if (!p) return null;
+  const imgs = p.images || [p.image];
+
   return (
     <main style={{position:"relative", zIndex:1, minHeight:"100vh"}}>
+      {/* Lightbox */}
+      {lightbox !== null && (
+        <Lightbox images={imgs} startIndex={lightbox} onClose={() => setLightbox(null)} />
+      )}
 
-      {/* ── HERO IMAGE PLEIN ÉCRAN ── */}
-      <div style={{
-        position:"relative", height: isMobile ? "55vh" : "70vh",
-        overflow:"hidden",
-      }}>
+      {/* ── HERO IMAGE ── */}
+      <div style={{position:"relative", height: isMobile ? "55vh" : "70vh", overflow:"hidden"}}>
         <div style={{
           position:"absolute", inset:0,
           backgroundImage:`url(${p.image})`,
           backgroundSize:"cover", backgroundPosition:"center",
-          filter:"brightness(0.45) saturate(0.7)",
+          filter:"brightness(0.4) saturate(0.7)",
           transform:"scale(1.05)",
         }}/>
-        {/* Dégradé bas */}
         <div style={{
           position:"absolute", inset:0,
           background:"linear-gradient(to bottom, transparent 30%, #0B0D1A 100%)",
         }}/>
+
         {/* Bouton retour */}
-        <button
-          onClick={() => navigate("home")}
-          style={{
-            position:"absolute", top: isMobile ? 90 : 100, left: isMobile ? 24 : 64,
-            fontFamily:FONT_BODY, fontSize:11, letterSpacing:2.5,
-            textTransform:"uppercase", fontWeight:700,
-            color:C.peach, background:"rgba(11,13,26,0.6)",
-            border:`1px solid ${C.border}`,
-            borderRadius:4, padding:"10px 18px",
-            backdropFilter:"blur(12px)",
-            display:"inline-flex", alignItems:"center", gap:8,
-          }}
-        >
+        <button onClick={() => navigate("home")} style={{
+          position:"absolute", top: isMobile ? 90 : 100, left: isMobile ? 24 : 64,
+          fontFamily:FONT_BODY, fontSize:11, letterSpacing:2.5, textTransform:"uppercase", fontWeight:700,
+          color:C.peach, background:"rgba(11,13,26,0.6)",
+          border:`1px solid ${C.border}`, borderRadius:4, padding:"10px 18px",
+          backdropFilter:"blur(12px)",
+          display:"inline-flex", alignItems:"center", gap:8,
+        }}>
           ← Retour
         </button>
-        {/* Titre sur l'image */}
+
+        {/* Titre */}
         <div style={{
           position:"absolute", bottom:0, left:0, right:0,
           padding: isMobile ? "0 24px 40px" : "0 64px 56px",
-          maxWidth:1400, margin:"0 auto",
         }}>
           <div style={{fontFamily:FONT_BODY, fontSize:11, letterSpacing:3, color:p.accent, textTransform:"uppercase", fontWeight:700, marginBottom:12}}>
             {p.category} · {p.year}
@@ -919,8 +1052,7 @@ function PageProjet({ project: p, isMobile, isTablet, navigate }) {
             fontFamily:FONT_DISPLAY,
             fontSize: isMobile ? "clamp(40px,10vw,60px)" : "clamp(56px,8vw,96px)",
             fontWeight:400, lineHeight:0.95,
-            color:C.peach, fontStyle:"italic",
-            letterSpacing:"-0.025em",
+            color:C.peach, fontStyle:"italic", letterSpacing:"-0.025em",
           }}>
             {p.title}
           </h1>
@@ -932,114 +1064,161 @@ function PageProjet({ project: p, isMobile, isTablet, navigate }) {
         maxWidth:1100, margin:"0 auto",
         padding: isMobile ? "48px 24px 80px" : isTablet ? "56px 40px 80px" : "64px 64px 100px",
       }}>
-        <div style={{
-          display:"grid",
-          gridTemplateColumns: isMobile ? "1fr" : "2fr 1fr",
-          gap: isMobile ? 48 : 80,
-          alignItems:"start",
-        }}>
+        <div style={{display:"grid", gridTemplateColumns: isMobile ? "1fr" : "2fr 1fr", gap: isMobile ? 48 : 64, alignItems:"start"}}>
 
-          {/* Colonne principale */}
+          {/* ── COLONNE PRINCIPALE ── */}
           <div>
+
             {/* Description */}
             <div style={{
               padding:"28px 32px",
               background:"rgba(26,31,56,0.5)",
               border:`1px solid rgba(212,165,116,0.2)`,
-              borderRadius:8,
-              backdropFilter:"blur(20px)",
-              marginBottom:32,
-              position:"relative",
+              borderRadius:8, backdropFilter:"blur(20px)",
+              marginBottom:40, position:"relative",
             }}>
               <CornerOrnaments color={p.accent}/>
-              <div style={{fontFamily:FONT_BODY, fontSize:11, letterSpacing:2.5, color:p.accent, textTransform:"uppercase", fontWeight:700, marginBottom:16}}>
+              <div style={{fontFamily:FONT_BODY, fontSize:10, letterSpacing:2.5, color:p.accent, textTransform:"uppercase", fontWeight:700, marginBottom:14}}>
                 À propos du projet
               </div>
               <p style={{fontFamily:FONT_BODY, fontSize:16, lineHeight:1.85, color:"rgba(251,190,180,0.85)", margin:0}}>
                 {p.desc}
               </p>
-              <p style={{fontFamily:FONT_BODY, fontSize:15, lineHeight:1.8, color:"rgba(251,190,180,0.65)", marginTop:16}}>
-                [Ajoute ici une description détaillée du projet : contexte, problématique, démarche, résultats…]
+              <p style={{fontFamily:FONT_BODY, fontSize:15, lineHeight:1.8, color:"rgba(251,190,180,0.6)", marginTop:16}}>
+                [Décris ici ta démarche, la problématique, les résultats obtenus…]
               </p>
             </div>
 
-            {/* Visuels placeholder */}
-            <div style={{fontFamily:FONT_BODY, fontSize:11, letterSpacing:2.5, color:p.accent, textTransform:"uppercase", fontWeight:700, marginBottom:16}}>
-              Visuels du projet
+            {/* ── GALERIE ── */}
+            <div style={{fontFamily:FONT_BODY, fontSize:10, letterSpacing:2.5, color:p.accent, textTransform:"uppercase", fontWeight:700, marginBottom:16}}>
+              Galerie · {imgs.length} visuel{imgs.length > 1 ? "s" : ""}
             </div>
-            <div style={{
-              display:"grid",
-              gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-              gap:12, marginBottom:32,
-            }}>
-              {[p.image, p.image].map((src, i) => (
-                <div key={i} style={{
-                  aspectRatio:"16/10", borderRadius:6, overflow:"hidden",
-                  border:`1px solid rgba(212,165,116,0.2)`,
-                }}>
-                  <img src={src} alt="" style={{width:"100%", height:"100%", objectFit:"cover", filter:"brightness(0.75) saturate(0.85)"}}/>
+
+            {/*
+              GRILLE ADAPTATIVE :
+              - 1 image  → pleine largeur
+              - 2 images → 2 colonnes égales
+              - 3 images → 1 grande + 2 petites
+              - 4+ images → grille 2 colonnes, première image en pleine largeur
+            */}
+            <div style={{display:"flex", flexDirection:"column", gap:10}}>
+
+              {/* Première image — toujours grande */}
+              <div
+                onClick={() => setLightbox(0)}
+                style={{
+                  width:"100%", aspectRatio:"16/9",
+                  borderRadius:6, overflow:"hidden",
+                  border:`1px solid rgba(212,165,116,0.15)`,
+                  cursor:"zoom-in", position:"relative",
+                }}
+              >
+                <img src={imgs[0]} alt="" style={{width:"100%", height:"100%", objectFit:"cover", transition:"transform .4s ease, filter .4s ease"}}
+                  onMouseEnter={e=>{e.currentTarget.style.transform="scale(1.04)";e.currentTarget.style.filter="brightness(1.1)";}}
+                  onMouseLeave={e=>{e.currentTarget.style.transform="scale(1)";e.currentTarget.style.filter="brightness(1)";}}
+                />
+                <div style={{
+                  position:"absolute", inset:0, display:"flex", alignItems:"center", justifyContent:"center",
+                  opacity:0, transition:"opacity .3s",
+                  background:"rgba(11,13,26,0.3)",
+                }}
+                  onMouseEnter={e=>e.currentTarget.style.opacity=1}
+                  onMouseLeave={e=>e.currentTarget.style.opacity=0}
+                >
+                  <div style={{
+                    width:48, height:48, borderRadius:"50%",
+                    background:"rgba(11,13,26,0.7)", backdropFilter:"blur(10px)",
+                    border:`1px solid ${p.accent}60`,
+                    display:"flex", alignItems:"center", justifyContent:"center",
+                    fontSize:20, color:p.accent,
+                  }}>⊕</div>
                 </div>
-              ))}
+              </div>
+
+              {/* Images suivantes — grille 2 colonnes */}
+              {imgs.length > 1 && (
+                <div style={{
+                  display:"grid",
+                  gridTemplateColumns: imgs.length === 2 ? "1fr" : "1fr 1fr",
+                  gap:10,
+                }}>
+                  {imgs.slice(1).map((src, i) => (
+                    <div
+                      key={i}
+                      onClick={() => setLightbox(i + 1)}
+                      style={{
+                        aspectRatio: imgs.length <= 3 ? "16/9" : "4/3",
+                        borderRadius:6, overflow:"hidden",
+                        border:`1px solid rgba(212,165,116,0.15)`,
+                        cursor:"zoom-in", position:"relative",
+                      }}
+                    >
+                      <img src={src} alt="" style={{width:"100%", height:"100%", objectFit:"cover", transition:"transform .4s ease, filter .4s ease"}}
+                        onMouseEnter={e=>{e.currentTarget.style.transform="scale(1.06)";e.currentTarget.style.filter="brightness(1.1)";}}
+                        onMouseLeave={e=>{e.currentTarget.style.transform="scale(1)";e.currentTarget.style.filter="brightness(1)";}}
+                      />
+                      <div style={{
+                        position:"absolute", inset:0, display:"flex", alignItems:"center", justifyContent:"center",
+                        opacity:0, transition:"opacity .3s",
+                        background:"rgba(11,13,26,0.3)",
+                      }}
+                        onMouseEnter={e=>e.currentTarget.style.opacity=1}
+                        onMouseLeave={e=>e.currentTarget.style.opacity=0}
+                      >
+                        <div style={{
+                          width:40, height:40, borderRadius:"50%",
+                          background:"rgba(11,13,26,0.7)", backdropFilter:"blur(10px)",
+                          border:`1px solid ${p.accent}60`,
+                          display:"flex", alignItems:"center", justifyContent:"center",
+                          fontSize:18, color:p.accent,
+                        }}>⊕</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 
-          {/* Colonne latérale */}
-          <div style={{display:"flex", flexDirection:"column", gap:20}}>
+          {/* ── COLONNE LATÉRALE ── */}
+          <div style={{display:"flex", flexDirection:"column", gap:16}}>
 
             {/* Tags domaines */}
-            <div style={{
-              padding:"24px",
-              background:"rgba(26,31,56,0.5)",
-              border:`1px solid rgba(212,165,116,0.2)`,
-              borderRadius:8,
-              backdropFilter:"blur(20px)",
-            }}>
+            <div style={{padding:"20px 24px", background:"rgba(26,31,56,0.5)", border:`1px solid rgba(212,165,116,0.2)`, borderRadius:8, backdropFilter:"blur(20px)"}}>
               <div style={{fontFamily:FONT_BODY, fontSize:10, letterSpacing:2.5, color:"rgba(251,190,180,0.5)", textTransform:"uppercase", fontWeight:700, marginBottom:12}}>
                 Domaines
               </div>
               <div style={{display:"flex", flexWrap:"wrap", gap:6}}>
-                {p.tags.filter(t => t.cat === "domain").map(t => <Tag key={t.label} label={t.label} cat={t.cat}/>)}
+                {p.tags.filter(t=>t.cat==="domain").map(t=><Tag key={t.label} label={t.label} cat={t.cat}/>)}
               </div>
             </div>
 
             {/* Tags outils */}
-            <div style={{
-              padding:"24px",
-              background:"rgba(26,31,56,0.5)",
-              border:`1px solid rgba(212,165,116,0.2)`,
-              borderRadius:8,
-              backdropFilter:"blur(20px)",
-            }}>
+            <div style={{padding:"20px 24px", background:"rgba(26,31,56,0.5)", border:`1px solid rgba(212,165,116,0.2)`, borderRadius:8, backdropFilter:"blur(20px)"}}>
               <div style={{fontFamily:FONT_BODY, fontSize:10, letterSpacing:2.5, color:"rgba(251,190,180,0.5)", textTransform:"uppercase", fontWeight:700, marginBottom:12}}>
-                Outils utilisés
+                Outils
               </div>
               <div style={{display:"flex", flexWrap:"wrap", gap:6}}>
-                {p.tags.filter(t => t.cat === "tool").map(t => <Tag key={t.label} label={t.label} cat={t.cat}/>)}
+                {p.tags.filter(t=>t.cat==="tool").map(t=><Tag key={t.label} label={t.label} cat={t.cat}/>)}
               </div>
             </div>
 
             {/* Infos projet */}
-            <div style={{
-              padding:"24px",
-              background:"rgba(26,31,56,0.5)",
-              border:`1px solid rgba(212,165,116,0.2)`,
-              borderRadius:8,
-              backdropFilter:"blur(20px)",
-            }}>
+            <div style={{padding:"20px 24px", background:"rgba(26,31,56,0.5)", border:`1px solid rgba(212,165,116,0.2)`, borderRadius:8, backdropFilter:"blur(20px)"}}>
               <div style={{fontFamily:FONT_BODY, fontSize:10, letterSpacing:2.5, color:"rgba(251,190,180,0.5)", textTransform:"uppercase", fontWeight:700, marginBottom:16}}>
                 Infos
               </div>
-              <div style={{display:"flex", flexDirection:"column", gap:12}}>
+              <div style={{display:"flex", flexDirection:"column", gap:10}}>
                 {[
-                  {label:"Année", value:p.year},
-                  {label:"Catégorie", value:p.category},
-                  {label:"Rôle", value:"[Ton rôle]"},
-                  {label:"Équipe", value:"[Taille équipe]"},
-                  {label:"Durée", value:"[Durée du projet]"},
-                ].map(item => (
+                  {label:"Année",    value:p.year},
+                  {label:"Catégorie",value:p.category},
+                  {label:"Rôle",     value:p.role     || "[Ton rôle]"},
+                  {label:"Équipe",   value:p.team     || "[Taille équipe]"},
+                  {label:"Durée",    value:p.duration || "[Durée]"},
+                ].map(item=>(
                   <div key={item.label} style={{display:"flex", justifyContent:"space-between", alignItems:"baseline", paddingBottom:10, borderBottom:"1px solid rgba(212,165,116,0.1)"}}>
                     <span style={{fontFamily:FONT_BODY, fontSize:11, color:"rgba(251,190,180,0.5)", fontWeight:600}}>{item.label}</span>
-                    <span style={{fontFamily:FONT_BODY, fontSize:13, color:C.peach, fontWeight:500}}>{item.value}</span>
+                    <span style={{fontFamily:FONT_BODY, fontSize:13, color:C.peach, fontWeight:500, textAlign:"right", maxWidth:"55%"}}>{item.value}</span>
                   </div>
                 ))}
               </div>
@@ -1048,26 +1227,24 @@ function PageProjet({ project: p, isMobile, isTablet, navigate }) {
             {/* Navigation entre projets */}
             <div style={{display:"flex", gap:8}}>
               {p.id > 1 && (
-                <button onClick={() => navigate(`projet-${p.id - 1}`)} style={{
+                <button onClick={() => navigate(`projet-${p.id-1}`)} style={{
                   flex:1, fontFamily:FONT_BODY, fontSize:11, letterSpacing:2, textTransform:"uppercase", fontWeight:700,
                   color:C.peach, background:"rgba(26,31,56,0.5)", border:`1px solid rgba(212,165,116,0.2)`,
-                  borderRadius:4, padding:"12px", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center", gap:6,
-                }}>
-                  ← Préc.
-                </button>
+                  borderRadius:4, padding:"12px 8px",
+                  display:"flex", alignItems:"center", justifyContent:"center", gap:6,
+                }}>← Préc.</button>
               )}
               {p.id < 4 && (
-                <button onClick={() => navigate(`projet-${p.id + 1}`)} style={{
+                <button onClick={() => navigate(`projet-${p.id+1}`)} style={{
                   flex:1, fontFamily:FONT_BODY, fontSize:11, letterSpacing:2, textTransform:"uppercase", fontWeight:700,
                   color:C.peach, background:"rgba(26,31,56,0.5)", border:`1px solid rgba(212,165,116,0.2)`,
-                  borderRadius:4, padding:"12px", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center", gap:6,
-                }}>
-                  Suiv. →
-                </button>
+                  borderRadius:4, padding:"12px 8px",
+                  display:"flex", alignItems:"center", justifyContent:"center", gap:6,
+                }}>Suiv. →</button>
               )}
             </div>
-
           </div>
+
         </div>
       </div>
     </main>
@@ -1111,7 +1288,7 @@ function MosaicCell({ project:p, delay, isMobile, navigate }) {
           <div style={{display:"flex",flexWrap:"wrap",gap:5,marginBottom:18}}>
             {p.tags.map(t => <Tag key={t.label} label={t.label} cat={t.cat}/>)}
           </div>
-          <button onClick={() => navigate && navigate(`projet-${p.id}`)} style={{display:"inline-flex",alignItems:"center",gap:8,fontFamily:FONT_BODY,fontSize:11,letterSpacing:2.5,textTransform:"uppercase",fontWeight:700,color:p.accent,borderBottom:`1px solid ${p.accent}50`,paddingBottom:2,background:"transparent",border:"none"}}>
+          <button onClick={(e)=>{e.stopPropagation();navigate&&navigate(`projet-${p.id}`)}} style={{display:"inline-flex",alignItems:"center",gap:8,fontFamily:FONT_BODY,fontSize:11,letterSpacing:2.5,textTransform:"uppercase",fontWeight:700,color:p.accent,borderBottom:`1px solid ${p.accent}50`,paddingBottom:2,background:"transparent",border:"none"}}>
             Voir le projet <span style={{animation:"arrowBounce 1.5s ease infinite"}}>→</span>
           </button>
         </div>
