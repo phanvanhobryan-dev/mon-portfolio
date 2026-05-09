@@ -469,7 +469,7 @@ function PageProfil({ isMobile, isTablet, navigate }) {
                 {icon:"◉", label:"Localisation", value:"Paris, France"},
                 {icon:"◆", label:"Email", value:"phanvanhobryan@gmail.com"},
                 {icon:"⬢", label:"LinkedIn", value:"bryanphanvanho", href:"https://linkedin.com/in/bryanphanvanho"},
-                {icon:"★", label:"Instagram",  value:"tenshi.blossom",        href:"https://instagram.com/tenshi.blossom"},
+                {icon:"★", label:"Instagram",  value:"tenshi.blossom",        href:"https://behance.net/bryanphv"},
               ].map((item) => (
                 <div key={item.label} style={{
                   display:"flex", alignItems:"center", gap:14,
@@ -481,8 +481,13 @@ function PageProfil({ isMobile, isTablet, navigate }) {
                   <span style={{color:C.gold, fontSize:14, width:20, textAlign:"center"}}>{item.icon}</span>
                   <div>
                     <div style={{fontFamily:FONT_BODY, fontSize:9, letterSpacing:2, color:"rgba(251,190,180,.5)", textTransform:"uppercase", fontWeight:700}}>{item.label}</div>
+                     {item.href ? (
+                      <a href={item.href} target="_blank" rel="noopener noreferrer" style={{fontFamily:FONT_BODY, fontSize:13, color:C.gold, textDecoration:"none", borderBottom:`1px solid ${C.gold}50`, paddingBottom:1}}>
+                        {item.value}
+                      </a>
+                    ) : (
                     <div style={{fontFamily:FONT_BODY, fontSize:13, color:C.peach, marginTop:2}}>{item.value}</div>
-                  </div>
+                    )}</div>
                 </div>
               ))}
             </div>
