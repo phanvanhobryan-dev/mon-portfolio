@@ -445,22 +445,28 @@ function PageProfil({ isMobile, isTablet, navigate }) {
 
           {/* Colonne gauche — portrait + infos */}
           <div>
-            {/* Portrait placeholder */}
+            {/* Portrait */}
             <div style={{
               width:"100%", aspectRatio:"3/4", maxWidth:380,
-              background:"linear-gradient(135deg, #1A1F38 0%, #0B0D1A 100%)",
               border:`1px solid ${C.border}`, borderRadius:8,
-              display:"flex", alignItems:"center", justifyContent:"center",
               marginBottom:32, position:"relative", overflow:"hidden",
             }}>
-              <div style={{position:"absolute",inset:0, background:"radial-gradient(circle at 50% 40%, rgba(212,165,116,.15) 0%, transparent 70%)"}}/>
+              <img
+                src="/bryan-profile.jpg"
+                alt="Bryan Phan Van Ho"
+                style={{
+                  width:"100%", height:"100%",
+                  objectFit:"cover", objectPosition:"center top",
+                  display:"block",
+                }}
+              />
+              {/* Léger vignettage sur les bords */}
+              <div style={{
+                position:"absolute", inset:0,
+                background:"linear-gradient(to bottom, transparent 60%, rgba(11,13,26,0.5) 100%)",
+                pointerEvents:"none",
+              }}/>
               <CornerOrnaments/>
-              <div style={{textAlign:"center", position:"relative"}}>
-                <div style={{fontSize:72, color:C.gold, opacity:.3, lineHeight:1}}>◉</div>
-                <div style={{fontFamily:FONT_BODY, fontSize:11, color:"rgba(251,190,180,.4)", letterSpacing:2, textTransform:"uppercase", marginTop:12}}>
-                  Photo à venir
-                </div>
-              </div>
             </div>
 
             {/* Infos contact */}
