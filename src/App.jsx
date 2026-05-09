@@ -205,6 +205,10 @@ export default function App() {
         {page === "profil"       && <PageProfil        {...shared} />}
         {page === "competences"  && <PageCompetences   {...shared} />}
         {page === "parcours"     && <PageParcours       {...shared} />}
+        {page === "projet-1"     && <PageProjet project={FEATURED[0]} {...shared} />}
+        {page === "projet-2"     && <PageProjet project={FEATURED[1]} {...shared} />}
+        {page === "projet-3"     && <PageProjet project={FEATURED[2]} {...shared} />}
+        {page === "projet-4"     && <PageProjet project={FEATURED[3]} {...shared} />}
       </div>
     </div>
   );
@@ -416,7 +420,7 @@ function PageHome({ isMobile, isTablet, navigate }) {
           gridTemplateRows: isMobile ? "repeat(4,300px)" : isTablet ? "340px 340px" : "420px 420px",
           gap: isMobile ? 12 : 16,
         }}>
-          {FEATURED.map((p,i) => <MosaicCell key={p.id} project={p} delay={i*80} isMobile={isMobile}/>)}
+          {FEATURED.map((p,i) => <MosaicCell key={p.id} project={p} delay={i*80} isMobile={isMobile} navigate={navigate}/>)}
         </div>
       </section>
 
@@ -445,28 +449,22 @@ function PageProfil({ isMobile, isTablet, navigate }) {
 
           {/* Colonne gauche — portrait + infos */}
           <div>
-            {/* Portrait */}
+            {/* Portrait placeholder */}
             <div style={{
               width:"100%", aspectRatio:"3/4", maxWidth:380,
+              background:"linear-gradient(135deg, #1A1F38 0%, #0B0D1A 100%)",
               border:`1px solid ${C.border}`, borderRadius:8,
+              display:"flex", alignItems:"center", justifyContent:"center",
               marginBottom:32, position:"relative", overflow:"hidden",
             }}>
-              <img
-                src="/PP.jpg"
-                alt="Bryan Phan Van Ho"
-                style={{
-                  width:"100%", height:"100%",
-                  objectFit:"cover", objectPosition:"center top",
-                  display:"block",
-                }}
-              />
-              {/* Léger vignettage sur les bords */}
-              <div style={{
-                position:"absolute", inset:0,
-                background:"linear-gradient(to bottom, transparent 60%, rgba(11,13,26,0.5) 100%)",
-                pointerEvents:"none",
-              }}/>
+              <div style={{position:"absolute",inset:0, background:"radial-gradient(circle at 50% 40%, rgba(212,165,116,.15) 0%, transparent 70%)"}}/>
               <CornerOrnaments/>
+              <div style={{textAlign:"center", position:"relative"}}>
+                <div style={{fontSize:72, color:C.gold, opacity:.3, lineHeight:1}}>◉</div>
+                <div style={{fontFamily:FONT_BODY, fontSize:11, color:"rgba(251,190,180,.4)", letterSpacing:2, textTransform:"uppercase", marginTop:12}}>
+                  Photo à venir
+                </div>
+              </div>
             </div>
 
             {/* Infos contact */}
@@ -867,15 +865,225 @@ function CornerOrnaments({ color=C.gold }) {
   );
 }
 
+// ═══════════════════════════════════════════════════════════════════════════════
+// PAGE PROJET DÉTAILLÉE
+// ═══════════════════════════════════════════════════════════════════════════════
+function PageProjet({ project: p, isMobile, isTablet, navigate }) {
+  if (!p) return null;
+  return (
+    <main style={{position:"relative", zIndex:1, minHeight:"100vh"}}>
+
+      {/* ── HERO IMAGE PLEIN ÉCRAN ── */}
+      <div style={{
+        position:"relative", height: isMobile ? "55vh" : "70vh",
+        overflow:"hidden",
+      }}>
+        <div style={{
+          position:"absolute", inset:0,
+          backgroundImage:`url(${p.image})`,
+          backgroundSize:"cover", backgroundPosition:"center",
+          filter:"brightness(0.45) saturate(0.7)",
+          transform:"scale(1.05)",
+        }}/>
+        {/* Dégradé bas */}
+        <div style={{
+          position:"absolute", inset:0,
+          background:"linear-gradient(to bottom, transparent 30%, #0B0D1A 100%)",
+        }}/>
+        {/* Bouton retour */}
+        <button
+          onClick={() => navigate("home")}
+          style={{
+            position:"absolute", top: isMobile ? 90 : 100, left: isMobile ? 24 : 64,
+            fontFamily:FONT_BODY, fontSize:11, letterSpacing:2.5,
+            textTransform:"uppercase", fontWeight:700,
+            color:C.peach, background:"rgba(11,13,26,0.6)",
+            border:`1px solid ${C.border}`,
+            borderRadius:4, padding:"10px 18px",
+            backdropFilter:"blur(12px)",
+            display:"inline-flex", alignItems:"center", gap:8,
+          }}
+        >
+          ← Retour
+        </button>
+        {/* Titre sur l'image */}
+        <div style={{
+          position:"absolute", bottom:0, left:0, right:0,
+          padding: isMobile ? "0 24px 40px" : "0 64px 56px",
+          maxWidth:1400, margin:"0 auto",
+        }}>
+          <div style={{fontFamily:FONT_BODY, fontSize:11, letterSpacing:3, color:p.accent, textTransform:"uppercase", fontWeight:700, marginBottom:12}}>
+            {p.category} · {p.year}
+          </div>
+          <h1 style={{
+            fontFamily:FONT_DISPLAY,
+            fontSize: isMobile ? "clamp(40px,10vw,60px)" : "clamp(56px,8vw,96px)",
+            fontWeight:400, lineHeight:0.95,
+            color:C.peach, fontStyle:"italic",
+            letterSpacing:"-0.025em",
+          }}>
+            {p.title}
+          </h1>
+        </div>
+      </div>
+
+      {/* ── CONTENU ── */}
+      <div style={{
+        maxWidth:1100, margin:"0 auto",
+        padding: isMobile ? "48px 24px 80px" : isTablet ? "56px 40px 80px" : "64px 64px 100px",
+      }}>
+        <div style={{
+          display:"grid",
+          gridTemplateColumns: isMobile ? "1fr" : "2fr 1fr",
+          gap: isMobile ? 48 : 80,
+          alignItems:"start",
+        }}>
+
+          {/* Colonne principale */}
+          <div>
+            {/* Description */}
+            <div style={{
+              padding:"28px 32px",
+              background:"rgba(26,31,56,0.5)",
+              border:`1px solid rgba(212,165,116,0.2)`,
+              borderRadius:8,
+              backdropFilter:"blur(20px)",
+              marginBottom:32,
+              position:"relative",
+            }}>
+              <CornerOrnaments color={p.accent}/>
+              <div style={{fontFamily:FONT_BODY, fontSize:11, letterSpacing:2.5, color:p.accent, textTransform:"uppercase", fontWeight:700, marginBottom:16}}>
+                À propos du projet
+              </div>
+              <p style={{fontFamily:FONT_BODY, fontSize:16, lineHeight:1.85, color:"rgba(251,190,180,0.85)", margin:0}}>
+                {p.desc}
+              </p>
+              <p style={{fontFamily:FONT_BODY, fontSize:15, lineHeight:1.8, color:"rgba(251,190,180,0.65)", marginTop:16}}>
+                [Ajoute ici une description détaillée du projet : contexte, problématique, démarche, résultats…]
+              </p>
+            </div>
+
+            {/* Visuels placeholder */}
+            <div style={{fontFamily:FONT_BODY, fontSize:11, letterSpacing:2.5, color:p.accent, textTransform:"uppercase", fontWeight:700, marginBottom:16}}>
+              Visuels du projet
+            </div>
+            <div style={{
+              display:"grid",
+              gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+              gap:12, marginBottom:32,
+            }}>
+              {[p.image, p.image].map((src, i) => (
+                <div key={i} style={{
+                  aspectRatio:"16/10", borderRadius:6, overflow:"hidden",
+                  border:`1px solid rgba(212,165,116,0.2)`,
+                }}>
+                  <img src={src} alt="" style={{width:"100%", height:"100%", objectFit:"cover", filter:"brightness(0.75) saturate(0.85)"}}/>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Colonne latérale */}
+          <div style={{display:"flex", flexDirection:"column", gap:20}}>
+
+            {/* Tags domaines */}
+            <div style={{
+              padding:"24px",
+              background:"rgba(26,31,56,0.5)",
+              border:`1px solid rgba(212,165,116,0.2)`,
+              borderRadius:8,
+              backdropFilter:"blur(20px)",
+            }}>
+              <div style={{fontFamily:FONT_BODY, fontSize:10, letterSpacing:2.5, color:"rgba(251,190,180,0.5)", textTransform:"uppercase", fontWeight:700, marginBottom:12}}>
+                Domaines
+              </div>
+              <div style={{display:"flex", flexWrap:"wrap", gap:6}}>
+                {p.tags.filter(t => t.cat === "domain").map(t => <Tag key={t.label} label={t.label} cat={t.cat}/>)}
+              </div>
+            </div>
+
+            {/* Tags outils */}
+            <div style={{
+              padding:"24px",
+              background:"rgba(26,31,56,0.5)",
+              border:`1px solid rgba(212,165,116,0.2)`,
+              borderRadius:8,
+              backdropFilter:"blur(20px)",
+            }}>
+              <div style={{fontFamily:FONT_BODY, fontSize:10, letterSpacing:2.5, color:"rgba(251,190,180,0.5)", textTransform:"uppercase", fontWeight:700, marginBottom:12}}>
+                Outils utilisés
+              </div>
+              <div style={{display:"flex", flexWrap:"wrap", gap:6}}>
+                {p.tags.filter(t => t.cat === "tool").map(t => <Tag key={t.label} label={t.label} cat={t.cat}/>)}
+              </div>
+            </div>
+
+            {/* Infos projet */}
+            <div style={{
+              padding:"24px",
+              background:"rgba(26,31,56,0.5)",
+              border:`1px solid rgba(212,165,116,0.2)`,
+              borderRadius:8,
+              backdropFilter:"blur(20px)",
+            }}>
+              <div style={{fontFamily:FONT_BODY, fontSize:10, letterSpacing:2.5, color:"rgba(251,190,180,0.5)", textTransform:"uppercase", fontWeight:700, marginBottom:16}}>
+                Infos
+              </div>
+              <div style={{display:"flex", flexDirection:"column", gap:12}}>
+                {[
+                  {label:"Année", value:p.year},
+                  {label:"Catégorie", value:p.category},
+                  {label:"Rôle", value:"[Ton rôle]"},
+                  {label:"Équipe", value:"[Taille équipe]"},
+                  {label:"Durée", value:"[Durée du projet]"},
+                ].map(item => (
+                  <div key={item.label} style={{display:"flex", justifyContent:"space-between", alignItems:"baseline", paddingBottom:10, borderBottom:"1px solid rgba(212,165,116,0.1)"}}>
+                    <span style={{fontFamily:FONT_BODY, fontSize:11, color:"rgba(251,190,180,0.5)", fontWeight:600}}>{item.label}</span>
+                    <span style={{fontFamily:FONT_BODY, fontSize:13, color:C.peach, fontWeight:500}}>{item.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Navigation entre projets */}
+            <div style={{display:"flex", gap:8}}>
+              {p.id > 1 && (
+                <button onClick={() => navigate(`projet-${p.id - 1}`)} style={{
+                  flex:1, fontFamily:FONT_BODY, fontSize:11, letterSpacing:2, textTransform:"uppercase", fontWeight:700,
+                  color:C.peach, background:"rgba(26,31,56,0.5)", border:`1px solid rgba(212,165,116,0.2)`,
+                  borderRadius:4, padding:"12px", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center", gap:6,
+                }}>
+                  ← Préc.
+                </button>
+              )}
+              {p.id < 4 && (
+                <button onClick={() => navigate(`projet-${p.id + 1}`)} style={{
+                  flex:1, fontFamily:FONT_BODY, fontSize:11, letterSpacing:2, textTransform:"uppercase", fontWeight:700,
+                  color:C.peach, background:"rgba(26,31,56,0.5)", border:`1px solid rgba(212,165,116,0.2)`,
+                  borderRadius:4, padding:"12px", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center", gap:6,
+                }}>
+                  Suiv. →
+                </button>
+              )}
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+
 // ─── MOSAIC CELL ────────────────────────────────────────────────────────────────
-function MosaicCell({ project:p, delay, isMobile }) {
+function MosaicCell({ project:p, delay, isMobile, navigate }) {
   const [hovered, setHovered] = useState(false);
   return (
     <div
       className="mosaic-cell"
       onMouseEnter={() => !isMobile && setHovered(true)}
       onMouseLeave={() => !isMobile && setHovered(false)}
-      onClick={() => isMobile && setHovered(h=>!h)}
+      onClick={() => isMobile ? setHovered(h=>!h) : navigate && navigate(`projet-${p.id}`)}
       style={{
         border:`1px solid ${hovered ? p.accent+"55" : "rgba(212,165,116,.12)"}`,
         boxShadow: hovered ? `0 0 48px ${p.accent}18` : "none",
@@ -903,9 +1111,9 @@ function MosaicCell({ project:p, delay, isMobile }) {
           <div style={{display:"flex",flexWrap:"wrap",gap:5,marginBottom:18}}>
             {p.tags.map(t => <Tag key={t.label} label={t.label} cat={t.cat}/>)}
           </div>
-          <div style={{display:"inline-flex",alignItems:"center",gap:8,fontFamily:FONT_BODY,fontSize:11,letterSpacing:2.5,textTransform:"uppercase",fontWeight:700,color:p.accent,borderBottom:`1px solid ${p.accent}50`,paddingBottom:2}}>
+          <button onClick={() => navigate && navigate(`projet-${p.id}`)} style={{display:"inline-flex",alignItems:"center",gap:8,fontFamily:FONT_BODY,fontSize:11,letterSpacing:2.5,textTransform:"uppercase",fontWeight:700,color:p.accent,borderBottom:`1px solid ${p.accent}50`,paddingBottom:2,background:"transparent",border:"none"}}>
             Voir le projet <span style={{animation:"arrowBounce 1.5s ease infinite"}}>→</span>
-          </div>
+          </button>
         </div>
       </div>
       <CornerOrnaments color={p.accent}/>
