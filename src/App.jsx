@@ -468,8 +468,8 @@ function PageProfil({ isMobile, isTablet, navigate }) {
               {[
                 {icon:"◉", label:"Localisation", value:"Paris, France"},
                 {icon:"◆", label:"Email", value:"phanvanhobryan@gmail.com"},
-                {icon:"⬢", label:"LinkedIn", value:"https://www.linkedin.com/in/bryan-phan-van-ho-6bbb931b3/"},
-                {icon:"★", label:"Behance", value:"behance.net/bryanphv"},
+                {icon:"⬢", label:"LinkedIn", value:"bryanphanvanho", href:"https://linkedin.com/in/bryanphanvanho"},
+                {icon:"★", label:"Instagram",  value:"tenshi.blossom",        href:"https://instagram.com/tenshi.blossom"},
               ].map((item) => (
                 <div key={item.label} style={{
                   display:"flex", alignItems:"center", gap:14,
