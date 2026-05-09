@@ -467,7 +467,7 @@ function PageProfil({ isMobile, isTablet, navigate }) {
             <div style={{display:"flex", flexDirection:"column", gap:12}}>
               {[
                 {icon:"◉", label:"Localisation", value:"Paris, France"},
-                {icon:"◆", label:"Email", value:"phanvanhobryan@gmail.com"},
+                {icon:"◆", label:"Email", value:"phanvanhobryan@gmail.com" href:"phanvanhobryan@gmail.com"},
                 {icon:"⬢", label:"LinkedIn", value:"bryanphanvanho", href:"https://www.linkedin.com/in/bryan-phan-van-ho-6bbb931b3/"},
                 {icon:"★", label:"Instagram",  value:"tenshi.blossom",        href:"https://www.instagram.com/tenshi.blossom/"},
               ].map((item) => (
