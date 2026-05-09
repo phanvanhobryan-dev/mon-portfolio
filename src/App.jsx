@@ -123,7 +123,7 @@ const FEATURED = [
     accent:"#FBBEB4", desc:"App de méditation immersive avec sound design custom. Coordination de 5 personnes.",
   },
   {
-    id:4, title:"Projets+1", category:"Direction artistique", year:"2024",
+    id:4, title:"Test", category:"Direction artistique", year:"2024",
     image:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
     tags:[{label:"Illustration",cat:"domain"},{label:"Print",cat:"domain"},{label:"Illustrator",cat:"tool"},{label:"InDesign",cat:"tool"}],
     accent:"#D4A574", desc:"Série de posters expérimentaux sur la perception géométrique.",
