@@ -15,7 +15,8 @@ const C = {
 const GLOBAL_CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { margin: 0; background: #0B0D1A; }
+  body { margin: 0; background: #0B0D1A; cursor: none; }
+  * { cursor: none !important; }
   a { text-decoration: none; }
 
   .cursor-ring {
@@ -122,7 +123,7 @@ const FEATURED = [
     accent:"#FBBEB4", desc:"App de méditation immersive avec sound design custom. Coordination de 5 personnes.",
   },
   {
-    id:4, title:"Projets", category:"Direction artistique", year:"2024",
+    id:4, title:"Projets+1", category:"Direction artistique", year:"2024",
     image:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
     tags:[{label:"Illustration",cat:"domain"},{label:"Print",cat:"domain"},{label:"Illustrator",cat:"tool"},{label:"InDesign",cat:"tool"}],
     accent:"#D4A574", desc:"Série de posters expérimentaux sur la perception géométrique.",
