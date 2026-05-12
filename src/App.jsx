@@ -1103,6 +1103,57 @@ function PageProjet({ project: p, isMobile, isTablet, navigate }) {
               </p>
             </div>
 
+
+            {/* ── DÉTAIL & PROCESSUS ── */}
+            <div style={{
+              padding:'28px 32px',
+              background:'rgba(26,31,56,0.5)',
+              border:'1px solid rgba(212,165,116,0.2)',
+              borderRadius:8, backdropFilter:'blur(20px)',
+              marginBottom:40, position:'relative',
+            }}>
+              <CornerOrnaments color={p.accent}/>
+
+              <div style={{fontFamily:FONT_BODY, fontSize:10, letterSpacing:2.5, color:p.accent, textTransform:'uppercase', fontWeight:700, marginBottom:24}}>
+                Détail & processus
+              </div>
+
+              {/* Contexte */}
+              <div style={{marginBottom:24}}>
+                <h4 style={{fontFamily:FONT_DISPLAY, fontSize:18, fontWeight:400, color:C.peach, fontStyle:'italic', marginBottom:10}}>
+                  Contexte
+                </h4>
+                <p style={{fontFamily:FONT_BODY, fontSize:14, lineHeight:1.8, color:'rgba(251,190,180,0.75)', margin:0}}>
+                  {p.contexte || '[Décris le contexte du projet…]'}
+                </p>
+              </div>
+
+              <div style={{height:1, background:'rgba(212,165,116,0.12)', marginBottom:24}}/>
+
+              {/* Ce que j ai fait */}
+              <div style={{marginBottom:24}}>
+                <h4 style={{fontFamily:FONT_DISPLAY, fontSize:18, fontWeight:400, color:C.peach, fontStyle:'italic', marginBottom:10}}>
+                  Ce que j&apos;ai fait
+                </h4>
+                <p style={{fontFamily:FONT_BODY, fontSize:14, lineHeight:1.8, color:'rgba(251,190,180,0.75)', margin:0}}>
+                  {p.contribution || '[Décris ton rôle et tes contributions…]'}
+                </p>
+              </div>
+
+              <div style={{height:1, background:'rgba(212,165,116,0.12)', marginBottom:24}}/>
+
+              {/* Résultats */}
+              <div>
+                <h4 style={{fontFamily:FONT_DISPLAY, fontSize:18, fontWeight:400, color:C.peach, fontStyle:'italic', marginBottom:10}}>
+                  Résultats & impact
+                </h4>
+                <p style={{fontFamily:FONT_BODY, fontSize:14, lineHeight:1.8, color:'rgba(251,190,180,0.75)', margin:0}}>
+                  {p.resultats || '[Décris les résultats obtenus…]'}
+                </p>
+              </div>
+
+            </div>
+
             {/* ── GALERIE ── */}
             <div style={{fontFamily:FONT_BODY, fontSize:10, letterSpacing:2.5, color:p.accent, textTransform:"uppercase", fontWeight:700, marginBottom:16}}>
               Galerie · {imgs.length} visuel{imgs.length > 1 ? "s" : ""}
