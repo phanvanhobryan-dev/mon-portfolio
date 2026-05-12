@@ -114,10 +114,11 @@ const FEATURED = [
   "/projets/canalu/display.jpg",  
   "/projets/canalu/media.jpg",
 ],
-    tags:[{label:"3D",cat:"domain"},{label:"Unreal Engine 5",cat:"tool"},{label:"Direction artistique",cat:"domain"},{label:"Gestion de projet",cat:"domain"}],
-    accent:"#FBBEB4", desc:"Environnement 3D immersif pour Canal+. Lors d’un concours, nous avons remporté la première place en proposant une idée innovante de nouvelle plateforme communautaire pour Canal+. Notre concept, Canal+U, est une nouvelle plateforme de streaming spécialement conçue pour que l’utilisateur devienne acteur de sa série et profite d’une expérience interactive, immersive et participative. J’ai occupé le rôle de Project Manager sur ce projet, en coordonnant l’équipe et en supervisant le développement du concept ainsi que l’expérience utilisateur.",
+    tags:[{label:"3D",cat:"domain"},{label:"Unreal Engine 5",cat:"tool"},{label:"Blender",cat:"tool"},{label:"Direction artistique",cat:"domain"},{label:"Gestion de projet",cat:"domain"}],
+    accent:"#FBBEB4", desc:"Environnement 3D immersif, participatic & interactif pour Canal+.",
     role:"Lead Designer", team:"20 personnes", duration:"2 semaines",
   },
+
   {
     id:2, title:"Digital Event", category:"Plateforme SaaS", year:"2025",
     image:"https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
@@ -1086,7 +1087,7 @@ function PageProjet({ project: p, isMobile, isTablet, navigate }) {
                 {p.desc}
               </p>
               <p style={{fontFamily:FONT_BODY, fontSize:15, lineHeight:1.8, color:"rgba(251,190,180,0.6)", marginTop:16}}>
-                [Décris ici ta démarche, la problématique, les résultats obtenus…]
+                [Lors d’un concours, nous avons remporté la première place en proposant une idée innovante de nouvelle plateforme communautaire pour Canal+. Notre concept, Canal+U, est une nouvelle plateforme de streaming spécialement conçue pour que l’utilisateur devienne acteur de sa série et profite d’une expérience interactive, immersive et participative. J’ai occupé le rôle de Project Manager sur ce projet, en coordonnant l’équipe et en supervisant le développement du concept ainsi que l’expérience utilisateur.]
               </p>
             </div>
 
