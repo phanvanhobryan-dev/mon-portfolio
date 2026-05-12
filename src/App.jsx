@@ -109,9 +109,10 @@ const FEATURED = [
     image:"/projets/canalu/cover.jpg",
     // ↓ Ajoute ici autant d'images que tu veux pour la galerie de ce projet
     images: [
-  "/projets/digital-event/cover.jpg",
-  "/projets/digital-event/visuel-1.jpg",
-  "/projets/digital-event/visuel-2.jpg",
+  "/projets/canalu/cover.jpg",
+  "/projets/canalu/team.jpg",
+  "/projets/canalu/display.jpg",  
+  "/projets/canalu/media.jpg",
 ],
     tags:[{label:"3D",cat:"domain"},{label:"Unreal Engine 5",cat:"tool"},{label:"Direction artistique",cat:"domain"},{label:"Gestion de projet",cat:"domain"}],
     accent:"#FBBEB4", desc:"Environnement 3D immersif pour une marque cosmétique. 6 semaines, équipe de 5.",
