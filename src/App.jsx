@@ -106,7 +106,7 @@ const GLOBAL_CSS = `
 const FEATURED = [
   {
     id:1, title:"Canal+U", category:"Design d'Innovation", year:"2023",
-    image:"/projets/canalu/cover./CanalU_Miniature.png",
+    image:"/projets/canalu/cover.png",
     // ↓ Ajoute ici autant d'images que tu veux pour la galerie de ce projet
     images: [
   "/projets/digital-event/cover.jpg",
