@@ -1087,7 +1087,7 @@ function PageProjet({ project: p, isMobile, isTablet, navigate }) {
                 {p.desc}
               </p>
               <p style={{fontFamily:FONT_BODY, fontSize:15, lineHeight:1.8, color:"rgba(251,190,180,0.6)", marginTop:16}}>
-                [Lors d’un concours, nous avons remporté la première place en proposant une idée innovante de nouvelle plateforme communautaire pour Canal+. Notre concept, Canal+U, est une nouvelle plateforme de streaming spécialement conçue pour que l’utilisateur devienne acteur de sa série et profite d’une expérience interactive, immersive et participative. J’ai occupé le rôle de Project Manager sur ce projet, en coordonnant l’équipe et en supervisant le développement du concept ainsi que l’expérience utilisateur.]
+    
               </p>
             </div>
 
