@@ -106,14 +106,13 @@ const GLOBAL_CSS = `
 const FEATURED = [
   {
     id:1, title:"Canal+U", category:"Design d'Innovation", year:"2023",
-    image:"/CanalU/CanalU_Miniature.png",
+    image:"/projets/canalu/cover./CanalU_Miniature.png",
     // ↓ Ajoute ici autant d'images que tu veux pour la galerie de ce projet
-    images:[
-      "https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=1200&q=85",
-      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=85",
-      "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200&q=85",
-      "https://images.unsplash.com/photo-1448375240586-882707db888b?w=1200&q=85",
-    ],
+    images: [
+  "/projets/digital-event/cover.jpg",
+  "/projets/digital-event/visuel-1.jpg",
+  "/projets/digital-event/visuel-2.jpg",
+],
     tags:[{label:"3D",cat:"domain"},{label:"Unreal Engine 5",cat:"tool"},{label:"Direction artistique",cat:"domain"},{label:"Gestion de projet",cat:"domain"}],
     accent:"#FBBEB4", desc:"Environnement 3D immersif pour une marque cosmétique. 6 semaines, équipe de 5.",
     role:"Lead Designer", team:"5 personnes", duration:"6 semaines",
