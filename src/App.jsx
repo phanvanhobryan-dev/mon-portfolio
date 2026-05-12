@@ -115,7 +115,7 @@ const FEATURED = [
   "/projets/canalu/media.jpg",
 ],
     tags:[{label:"3D",cat:"domain"},{label:"Unreal Engine 5",cat:"tool"},{label:"Blender",cat:"tool"},{label:"Direction artistique",cat:"domain"},{label:"Gestion de projet",cat:"domain"}],
-    accent:"#FBBEB4", desc:"Environnement 3D immersif, participatic & interactif pour Canal+.",
+    accent:"#FBBEB4", desc:"Plateforme de Streaming innovanter, immersif, participatic & interactif pour Canal+",
     role:"Lead Designer", team:"20 personnes", duration:"2 semaines",
     contexte:"Canal+ souhaitait créer une expérience immersive et innovante pour promouvoir leur offre. Le brief : concevoir un environnement 3D interactif et participatif accessible en événement live.",
     contribution:"[Décris ici ce que tu as fait sur ce projet : ta direction artistique, la coordination de l'équipe, les choix créatifs, les outils utilisés…]",
