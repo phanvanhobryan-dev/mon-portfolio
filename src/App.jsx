@@ -206,7 +206,20 @@ export default function App() {
   // Scroll to top when page changes
   useEffect(() => { window.scrollTo(0, 0); }, [page]);
 
-  const navigate = (target) => setPage(target);
+  // Écoute la flèche retour/avant du navigateur
+  useEffect(() => {
+    const handlePop = (e) => {
+      const p = e.state?.page || "home";
+      setPage(p);
+    };
+    window.addEventListener("popstate", handlePop);
+    return () => window.removeEventListener("popstate", handlePop);
+  }, []);
+
+  const navigate = (target) => {
+    window.history.pushState({ page: target }, "", `#${target}`);
+    setPage(target);
+  };
 
   const shared = { isMobile, isTablet, navigate, page };
 
