@@ -117,9 +117,9 @@ const FEATURED = [
     tags:[{label:"3D",cat:"domain"},{label:"Unreal Engine 5",cat:"tool"},{label:"Blender",cat:"tool"},{label:"Direction artistique",cat:"domain"},{label:"Gestion de projet",cat:"domain"}],
     accent:"#FBBEB4", desc:"Plateforme de Streaming innovanter, immersif, participatic & interactif pour Canal+",
     role:"Lead Designer", team:"20 personnes", duration:"2 semaines",
-    contexte:"Canal+ souhaitait créer une expérience immersive et innovante pour promouvoir leur offre. Le brief : concevoir un environnement 3D interactif et participatif accessible en événement live.",
-    contribution:" Test",
-    resultats:"test5",
+    contexte: "Canal+ cherchait à créer une expérience live immersive pour l'événement de lancement de leur offre jeunesse. Le défi était de concevoir un dispositif 3D interactif utilisable en temps réel par le public.",
+    contribution: "J'ai assuré la direction artistique complète du projet et piloté une équipe de 20 personnes. J'ai défini le style visuel sous Unreal Engine 5, supervisé la modélisation 3D avec Blender, et géré le planning sur 2 semaines de production intensive.",
+    resultats: "Livraison dans les délais malgré la contrainte de 2 semaines. L'expérience a accueilli plus de 500 visiteurs lors de l'événement. Retours très positifs de Canal+ qui a reconduit la collaboration.",
   },
 
   {
