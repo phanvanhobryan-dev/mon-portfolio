@@ -1113,8 +1113,7 @@ function PageProjet({ project: p, isMobile, isTablet, navigate }) {
                   cursor:"zoom-in", position:"relative",
                 }}
               >
-                <img src={imgs[0]} alt="" style={{width:"100%", height:"100%", objectFit:"cover", transition:"transform .4s ease, filter .4s ease"}}
-                  onMouseEnter={e=>{e.currentTarget.style.transform="scale(1.04)";e.currentTarget.style.filter="brightness(1.1)";}}
+                <img src={imgs[0]} alt="" loading="lazy" style={{width:"100%", height:"100%", objectFit:"cover", transition:"transform .4s ease, filter .4s ease"}}                  onMouseEnter={e=>{e.currentTarget.style.transform="scale(1.04)";e.currentTarget.style.filter="brightness(1.1)";}}
                   onMouseLeave={e=>{e.currentTarget.style.transform="scale(1)";e.currentTarget.style.filter="brightness(1)";}}
                 />
                 <div style={{
@@ -1153,8 +1152,7 @@ function PageProjet({ project: p, isMobile, isTablet, navigate }) {
                         cursor:"zoom-in", position:"relative",
                       }}
                     >
-                      <img src={src} alt="" style={{width:"100%", height:"100%", objectFit:"cover", transition:"transform .4s ease, filter .4s ease"}}
-                        onMouseEnter={e=>{e.currentTarget.style.transform="scale(1.06)";e.currentTarget.style.filter="brightness(1.1)";}}
+<img src={src} alt="" loading="lazy" style={{width:"100%", height:"100%", objectFit:"cover", transition:"transform .4s ease, filter .4s ease"}}                        onMouseEnter={e=>{e.currentTarget.style.transform="scale(1.06)";e.currentTarget.style.filter="brightness(1.1)";}}
                         onMouseLeave={e=>{e.currentTarget.style.transform="scale(1)";e.currentTarget.style.filter="brightness(1)";}}
                       />
                       <div style={{
