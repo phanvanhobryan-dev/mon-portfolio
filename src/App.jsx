@@ -451,8 +451,7 @@ function PageHome({ isMobile, isTablet, navigate }) {
             fontWeight:400, lineHeight:1.0, letterSpacing:"-0.025em", color:C.peach, marginBottom:28,
           }}>
             <span style={{display:"block", fontStyle:"italic"}}>Creative Designer</span>
-            <span style={{display:"block"}}>&amp; <span style={{color:C.gold}}>Digital Project</span></span>
-            <span style={{display:"block", color:C.gold}}>Manager.</span>
+            <span style={{display:"block"}}>&amp; <span style={{color:C.gold}}>Digital Project Manager.</span></span>
           </h1>
 
           <p style={{fontFamily:FONT_BODY, fontSize:isMobile?14:16, lineHeight:1.75, color:"rgba(251,190,180,.72)", maxWidth:480}}>
