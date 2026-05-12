@@ -118,8 +118,8 @@ const FEATURED = [
     accent:"#FBBEB4", desc:"Plateforme de Streaming innovanter, immersif, participatic & interactif pour Canal+",
     role:"Lead Designer", team:"20 personnes", duration:"2 semaines",
     contexte:"Canal+ souhaitait créer une expérience immersive et innovante pour promouvoir leur offre. Le brief : concevoir un environnement 3D interactif et participatif accessible en événement live.",
-    contribution:"[Décris ici ce que tu as fait sur ce projet : ta direction artistique, la coordination de l'équipe, les choix créatifs, les outils utilisés…]",
-    resultats:"[Décris ici les résultats : retours client, chiffres clés, impact, reconnaissance du projet…]",
+    contribution:" Test",
+    resultats:"test5",
   },
 
   {
