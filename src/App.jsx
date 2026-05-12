@@ -115,8 +115,8 @@ const FEATURED = [
   "/projets/canalu/media.jpg",
 ],
     tags:[{label:"3D",cat:"domain"},{label:"Unreal Engine 5",cat:"tool"},{label:"Direction artistique",cat:"domain"},{label:"Gestion de projet",cat:"domain"}],
-    accent:"#FBBEB4", desc:"Environnement 3D immersif pour une marque cosmétique. 6 semaines, équipe de 5.",
-    role:"Lead Designer", team:"5 personnes", duration:"6 semaines",
+    accent:"#FBBEB4", desc:"Environnement 3D immersif pour Canal+. Lors d’un concours, nous avons remporté la première place en proposant une idée innovante de nouvelle plateforme communautaire pour Canal+. Notre concept, Canal+U, est une nouvelle plateforme de streaming spécialement conçue pour que l’utilisateur devienne acteur de sa série et profite d’une expérience interactive, immersive et participative. J’ai occupé le rôle de Project Manager sur ce projet, en coordonnant l’équipe et en supervisant le développement du concept ainsi que l’expérience utilisateur.",
+    role:"Lead Designer", team:"20 personnes", duration:"2 semaines",
   },
   {
     id:2, title:"Digital Event", category:"Plateforme SaaS", year:"2025",
