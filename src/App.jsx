@@ -117,6 +117,9 @@ const FEATURED = [
     tags:[{label:"3D",cat:"domain"},{label:"Unreal Engine 5",cat:"tool"},{label:"Blender",cat:"tool"},{label:"Direction artistique",cat:"domain"},{label:"Gestion de projet",cat:"domain"}],
     accent:"#FBBEB4", desc:"Environnement 3D immersif, participatic & interactif pour Canal+.",
     role:"Lead Designer", team:"20 personnes", duration:"2 semaines",
+    contexte:"Canal+ souhaitait créer une expérience immersive et innovante pour promouvoir leur offre. Le brief : concevoir un environnement 3D interactif et participatif accessible en événement live.",
+    contribution:"[Décris ici ce que tu as fait sur ce projet : ta direction artistique, la coordination de l'équipe, les choix créatifs, les outils utilisés…]",
+    resultats:"[Décris ici les résultats : retours client, chiffres clés, impact, reconnaissance du projet…]",
   },
 
   {
@@ -130,6 +133,9 @@ const FEATURED = [
     tags:[{label:"UI/UX",cat:"domain"},{label:"Figma",cat:"tool"},{label:"Stratégie produit",cat:"domain"},{label:"Gestion de projet",cat:"domain"}],
     accent:"#D4A574", desc:"Dashboard analytique pour artistes indépendants. 8 mois, lead d'une équipe de 12.",
     role:"Project Lead", team:"12 personnes", duration:"8 mois",
+    contexte:"[Décris ici le contexte de Digital Event : pour qui, quel besoin, quel marché…]",
+    contribution:"[Décris ici ton rôle de Project Lead : coordination des 12 personnes, pilotage, livrables, méthodo…]",
+    resultats:"[Décris ici les résultats obtenus : satisfaction client, métriques, délais, impact produit…]",
   },
   {
     id:3, title:"Disney", category:"Application mobile", year:"2023",
@@ -144,6 +150,9 @@ const FEATURED = [
     tags:[{label:"UI/UX",cat:"domain"},{label:"Motion design",cat:"domain"},{label:"Figma",cat:"tool"},{label:"After Effects",cat:"tool"}],
     accent:"#FBBEB4", desc:"App de méditation immersive avec sound design custom. Coordination de 5 personnes.",
     role:"Product Designer", team:"5 personnes", duration:"4 mois",
+    contexte:"[Décris ici le contexte du projet Disney : brief, enjeux, public cible, contraintes…]",
+    contribution:"[Décris ici ta contribution : design des écrans, animations, coordination de l'équipe de 5…]",
+    resultats:"[Décris ici les résultats : retours utilisateurs, métriques d'engagement, retour client…]",
   },
   {
     id:4, title:"Test", category:"Direction artistique", year:"2024",
@@ -155,6 +164,9 @@ const FEATURED = [
     tags:[{label:"Illustration",cat:"domain"},{label:"Print",cat:"domain"},{label:"Illustrator",cat:"tool"},{label:"InDesign",cat:"tool"}],
     accent:"#D4A574", desc:"Série de posters expérimentaux sur la perception géométrique.",
     role:"Designer solo", team:"Solo", duration:"3 mois",
+    contexte:"[Décris ici le contexte de ce projet de direction artistique : commanditaire, objectif, contraintes créatives…]",
+    contribution:"[Décris ici ton travail : concept, illustrations, choix typographiques, production…]",
+    resultats:"[Décris ici les résultats : diffusion, retours, récompenses éventuelles…]",
   },
 ];
 
@@ -1089,58 +1101,6 @@ function PageProjet({ project: p, isMobile, isTablet, navigate }) {
               <p style={{fontFamily:FONT_BODY, fontSize:15, lineHeight:1.8, color:"rgba(251,190,180,0.6)", marginTop:16}}>
     
               </p>
-            </div>
-
-
-            {/* ── DÉTAIL DU PROJET ── */}
-            <div style={{
-              padding:"28px 32px",
-              background:"rgba(26,31,56,0.5)",
-              border:`1px solid rgba(212,165,116,0.2)`,
-              borderRadius:8, backdropFilter:"blur(20px)",
-              marginBottom:40, position:"relative",
-            }}>
-              <CornerOrnaments color={p.accent}/>
-
-              {/* Titre */}
-              <div style={{fontFamily:FONT_BODY, fontSize:10, letterSpacing:2.5, color:p.accent, textTransform:"uppercase", fontWeight:700, marginBottom:20}}>
-                Détail & processus
-              </div>
-
-              {/* Bloc 1 : Contexte */}
-              <div style={{marginBottom:24}}>
-                <h4 style={{fontFamily:FONT_DISPLAY, fontSize:16, fontWeight:400, color:C.peach, fontStyle:"italic", marginBottom:10}}>
-                  Contexte
-                </h4>
-                <p style={{fontFamily:FONT_BODY, fontSize:14, lineHeight:1.8, color:"rgba(251,190,180,0.75)", margin:0}}>
-                  {p.contexte || "[Décris ici le contexte du projet : pour qui, pourquoi, quels enjeux…]"}
-                </p>
-              </div>
-
-              <div style={{height:1, background:"rgba(212,165,116,0.12)", marginBottom:24}}/>
-
-              {/* Bloc 2 : Ma contribution */}
-              <div style={{marginBottom:24}}>
-                <h4 style={{fontFamily:FONT_DISPLAY, fontSize:16, fontWeight:400, color:C.peach, fontStyle:"italic", marginBottom:10}}>
-                  Ce que j'ai fait
-                </h4>
-                <p style={{fontFamily:FONT_BODY, fontSize:14, lineHeight:1.8, color:"rgba(251,190,180,0.75)", margin:0}}>
-                  {p.contribution || "[Décris ici ton rôle précis, tes tâches, tes responsabilités…]"}
-                </p>
-              </div>
-
-              <div style={{height:1, background:"rgba(212,165,116,0.12)", marginBottom:24}}/>
-
-              {/* Bloc 3 : Résultats */}
-              <div>
-                <h4 style={{fontFamily:FONT_DISPLAY, fontSize:16, fontWeight:400, color:C.peach, fontStyle:"italic", marginBottom:10}}>
-                  Résultats & impact
-                </h4>
-                <p style={{fontFamily:FONT_BODY, fontSize:14, lineHeight:1.8, color:"rgba(251,190,180,0.75)", margin:0}}>
-                  {p.resultats || "[Décris ici les résultats obtenus, les métriques, l'impact du projet…]"}
-                </p>
-              </div>
-
             </div>
 
             {/* ── GALERIE ── */}
