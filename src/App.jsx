@@ -341,7 +341,7 @@ function Header({ page, navigate, isMobile }) {
           </svg>
           {!isMobile && (
             <span style={{fontFamily:FONT_BODY, fontSize:12, color:C.gold, letterSpacing:2.5, fontWeight:700, textTransform:"uppercase"}}>
-              Blossom Hanami
+              Bryan PHV
             </span>
           )}
         </button>
@@ -451,7 +451,8 @@ function PageHome({ isMobile, isTablet, navigate }) {
             fontWeight:400, lineHeight:1.0, letterSpacing:"-0.025em", color:C.peach, marginBottom:28,
           }}>
             <span style={{display:"block", fontStyle:"italic"}}>Creative Designer</span>
-            <span style={{display:"block"}}>&amp; <span style={{color:C.gold}}>Digital Project Manager.</span></span>
+            <span style={{display:"block"}}>&amp; <span style={{color:C.gold}}>Digital Project</span></span>
+            <span style={{display:"block", color:C.gold}}>Manager.</span>
           </h1>
 
           <p style={{fontFamily:FONT_BODY, fontSize:isMobile?14:16, lineHeight:1.75, color:"rgba(251,190,180,.72)", maxWidth:480}}>
@@ -921,6 +922,107 @@ function CornerOrnaments({ color=C.gold }) {
 // ═══════════════════════════════════════════════════════════════════════════════
 // LIGHTBOX
 // ═══════════════════════════════════════════════════════════════════════════════
+
+// ─── GALLERY ITEM ──────────────────────────────────────────────────────────────
+// Affiche une image, une vidéo locale (mp4/webm) ou un embed YouTube/Vimeo
+function GalleryItem({ src, index, isFirst, isVid, isEmb, accent, onLightbox }) {
+  const isClickable = !isVid && !isEmb;
+
+  // ── Vidéo locale MP4 / WEBM ──────────────────────────────────────────────
+  if (isVid) {
+    return (
+      <div style={{
+        width:"100%", borderRadius:6, overflow:"hidden",
+        border:"1px solid rgba(212,165,116,0.15)",
+        background:"#000",
+      }}>
+        <div style={{fontFamily:"'Manrope',sans-serif", fontSize:9, letterSpacing:2, color:"rgba(212,165,116,0.6)", textTransform:"uppercase", fontWeight:700, padding:"8px 12px"}}>
+          ▶ Vidéo
+        </div>
+        <video
+          src={src}
+          controls
+          style={{width:"100%", height:"auto", display:"block"}}
+        />
+      </div>
+    );
+  }
+
+  // ── Embed YouTube / Vimeo ────────────────────────────────────────────────
+  if (isEmb) {
+    return (
+      <div style={{
+        width:"100%", borderRadius:6, overflow:"hidden",
+        border:"1px solid rgba(212,165,116,0.15)",
+        background:"#000", position:"relative",
+      }}>
+        <div style={{fontFamily:"'Manrope',sans-serif", fontSize:9, letterSpacing:2, color:"rgba(212,165,116,0.6)", textTransform:"uppercase", fontWeight:700, padding:"8px 12px"}}>
+          ▶ Vidéo
+        </div>
+        <iframe
+          src={src}
+          style={{width:"100%", aspectRatio:"16/9", border:"none", display:"block"}}
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowFullScreen
+          loading="lazy"
+          title={`video-${index}`}
+        />
+      </div>
+    );
+  }
+
+  // ── Image ────────────────────────────────────────────────────────────────
+  return (
+    <div
+      onClick={onLightbox}
+      style={{
+        width:"100%",
+        borderRadius:6, overflow:"hidden",
+        border:`1px solid rgba(212,165,116,0.15)`,
+        cursor:"zoom-in", position:"relative",
+        background:"rgba(11,13,26,0.6)",
+        display:"flex", alignItems:"center", justifyContent:"center",
+      }}
+    >
+      <img
+        src={src}
+        alt=""
+        loading="lazy"
+        style={{
+          width:"100%", height:"auto",
+          objectFit:"contain", display:"block",
+          transition:"transform .4s ease, filter .4s ease",
+        }}
+        onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.03)"; e.currentTarget.style.filter = "brightness(1.1)"; }}
+        onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)";    e.currentTarget.style.filter = "brightness(1)"; }}
+      />
+      {/* Icône zoom au hover */}
+      <div style={{
+        position:"absolute", inset:0,
+        display:"flex", alignItems:"center", justifyContent:"center",
+        opacity:0, transition:"opacity .25s",
+        background:"rgba(11,13,26,0.25)",
+        pointerEvents:"none",
+      }}
+        onMouseEnter={e => e.currentTarget.style.opacity = 1}
+        onMouseLeave={e => e.currentTarget.style.opacity = 0}
+      >
+        <div style={{
+          width: isFirst ? 48 : 40,
+          height: isFirst ? 48 : 40,
+          borderRadius:"50%",
+          background:"rgba(11,13,26,0.75)",
+          backdropFilter:"blur(10px)",
+          border:`1px solid ${accent}70`,
+          display:"flex", alignItems:"center", justifyContent:"center",
+          fontSize: isFirst ? 20 : 16,
+          color: accent,
+        }}>⊕</div>
+      </div>
+    </div>
+  );
+}
+
 function Lightbox({ images, startIndex, onClose }) {
   const [current, setCurrent] = useState(startIndex);
 
@@ -1032,6 +1134,10 @@ function PageProjet({ project: p, isMobile, isTablet, navigate }) {
   const [lightbox, setLightbox] = useState(null); // index image ouverte, null = fermée
   if (!p) return null;
   const imgs = p.images || [p.image];
+  const isVideo = (src) => typeof src === "string" && (src.endsWith(".mp4") || src.endsWith(".webm"));
+  const isEmbed = (src) => typeof src === "string" && (src.includes("youtube.com") || src.includes("vimeo.com"));
+  const isMedia = (src) => isVideo(src) || isEmbed(src);
+
 
   return (
     <main style={{position:"relative", zIndex:1, minHeight:"100vh"}}>
@@ -1179,82 +1285,18 @@ function PageProjet({ project: p, isMobile, isTablet, navigate }) {
               - 4+ images → grille 2 colonnes, première image en pleine largeur
             */}
             <div style={{display:"flex", flexDirection:"column", gap:10}}>
-
-              {/* Première image — toujours grande */}
-              <div
-                onClick={() => setLightbox(0)}
-                style={{
-                  width:"100%",
-                  borderRadius:6, overflow:"hidden",
-                  border:`1px solid rgba(212,165,116,0.15)`,
-                  cursor:"zoom-in", position:"relative",
-                  background:"rgba(11,13,26,0.6)",
-                  display:"flex", alignItems:"center", justifyContent:"center",
-                }}
-              >
-                <img src={imgs[0]} alt="" loading="lazy" style={{width:"100%", height:"auto", objectFit:"contain", display:"block", transition:"transform .4s ease, filter .4s ease"}}                  onMouseEnter={e=>{e.currentTarget.style.transform="scale(1.04)";e.currentTarget.style.filter="brightness(1.1)";}}
-                  onMouseLeave={e=>{e.currentTarget.style.transform="scale(1)";e.currentTarget.style.filter="brightness(1)";}}
+              {imgs.map((src, i) => (
+                <GalleryItem
+                  key={i}
+                  src={src}
+                  index={i}
+                  isFirst={i === 0}
+                  isVid={isVideo(src)}
+                  isEmb={isEmbed(src)}
+                  accent={p.accent}
+                  onLightbox={() => { if (!isMedia(src)) setLightbox(i); }}
                 />
-                <div style={{
-                  position:"absolute", inset:0, display:"flex", alignItems:"center", justifyContent:"center",
-                  opacity:0, transition:"opacity .3s",
-                  background:"rgba(11,13,26,0.3)",
-                }}
-                  onMouseEnter={e=>e.currentTarget.style.opacity=1}
-                  onMouseLeave={e=>e.currentTarget.style.opacity=0}
-                >
-                  <div style={{
-                    width:48, height:48, borderRadius:"50%",
-                    background:"rgba(11,13,26,0.7)", backdropFilter:"blur(10px)",
-                    border:`1px solid ${p.accent}60`,
-                    display:"flex", alignItems:"center", justifyContent:"center",
-                    fontSize:20, color:p.accent,
-                  }}>⊕</div>
-                </div>
-              </div>
-
-              {/* Images suivantes — grille 2 colonnes */}
-              {imgs.length > 1 && (
-                <div style={{
-                  display:"grid",
-                  gridTemplateColumns: imgs.length === 2 ? "1fr" : "1fr 1fr",
-                  gap:10,
-                }}>
-                  {imgs.slice(1).map((src, i) => (
-                    <div
-                      key={i}
-                      onClick={() => setLightbox(i + 1)}
-                      style={{
-                        borderRadius:6, overflow:"hidden",
-                        border:`1px solid rgba(212,165,116,0.15)`,
-                        cursor:"zoom-in", position:"relative",
-                        background:"rgba(11,13,26,0.6)",
-                        display:"flex", alignItems:"center", justifyContent:"center",
-                      }}
-                    >
-<img src={src} alt="" loading="lazy" style={{width:"100%", height:"auto", objectFit:"contain", display:"block", transition:"transform .4s ease, filter .4s ease"}}                        onMouseEnter={e=>{e.currentTarget.style.transform="scale(1.06)";e.currentTarget.style.filter="brightness(1.1)";}}
-                        onMouseLeave={e=>{e.currentTarget.style.transform="scale(1)";e.currentTarget.style.filter="brightness(1)";}}
-                      />
-                      <div style={{
-                        position:"absolute", inset:0, display:"flex", alignItems:"center", justifyContent:"center",
-                        opacity:0, transition:"opacity .3s",
-                        background:"rgba(11,13,26,0.3)",
-                      }}
-                        onMouseEnter={e=>e.currentTarget.style.opacity=1}
-                        onMouseLeave={e=>e.currentTarget.style.opacity=0}
-                      >
-                        <div style={{
-                          width:40, height:40, borderRadius:"50%",
-                          background:"rgba(11,13,26,0.7)", backdropFilter:"blur(10px)",
-                          border:`1px solid ${p.accent}60`,
-                          display:"flex", alignItems:"center", justifyContent:"center",
-                          fontSize:18, color:p.accent,
-                        }}>⊕</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
+              ))}
             </div>
           </div>
 
