@@ -115,11 +115,11 @@ const FEATURED = [
   "/projets/canalu/media.jpg",
 ],
     tags:[{label:"3D",cat:"domain"},{label:"UX/UI",cat:"domain"},{label:"Stratégie & Marketing",cat:"domain"},{label:"Unreal Engine 5",cat:"tool"},{label:"Blender",cat:"tool"},{label:"Figma",cat:"tool"},{label:"Photoshop",cat:"tool"}, {label:"PremierPro",cat:"tool"},{label:"Direction artistique",cat:"domain"},{label:"Gestion de projet",cat:"domain"}],
-    accent:"#FBBEB4", desc:"Plateforme de Streaming innovanter, immersif, participatic & interactif pour Canal+",
+    accent:"#FBBEB4", desc:"Plateforme de Streaming innovanter, immersif, participatic & interactif pour Canal+ lors d'une compétition",
     role:"Project Manager", team:"20 personnes", duration:"2 semaines",
-    contexte: "Canal+ cherchait à créer une expérience live immersive pour l'événement de lancement de leur offre jeunesse. Le défi était de concevoir un dispositif 3D interactif utilisable en temps réel par le public.",
-    contribution: "J'ai assuré la direction artistique complète du projet et piloté une équipe de 20 personnes. J'ai défini le style visuel sous Unreal Engine 5, supervisé la modélisation 3D avec Blender, et géré le planning sur 2 semaines de production intensive.",
-    resultats: "Livraison dans les délais malgré la contrainte de 2 semaines. L'expérience a accueilli plus de 500 visiteurs lors de l'événement. Retours très positifs de Canal+ qui a reconduit la collaboration."
+    contexte: "Canal+ cherchait à créer une une nouvelle plateforme de streaming innovante pour remettre leur production de series et films exclusives à Canal+.",
+    contribution: "J'ai assuré la gestion complète du projet et piloté une équipe de 20 personnes. J'ai défini le style visuel, supervisé et produit la modélisation 3D, et géré le planning sur 2 semaines de production intensive. j'étais en charge de coordoner et de faire le liens entre les 3 pôles de mon équipe : les Créatifs, la Production et les Strats",
+    resultats: "Livraison dans les délais malgré la contrainte de 2 semaines. Nous avons réussi à livrer une solution innovante et performante et nous avons remporté la compétition en obtenant la première place."
   },
 
   {
