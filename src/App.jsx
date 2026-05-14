@@ -114,7 +114,7 @@ const FEATURED = [
   "/projets/canalu/display.jpg",  
   "/projets/canalu/media.jpg",
 ],
-    tags:[{label:"3D",cat:"domain"},{label:"UX/UI",cat:"domain"},{label:"Stratégie & Marketing",cat:"domain"},{label:"Unreal Engine 5",cat:"tool"},{label:"Blender",cat:"tool"},{label:"Figma",cat:"tool"},{label:"Photoshop",cat:"tool"},{label:"Direction artistique",cat:"domain"},{label:"Gestion de projet",cat:"domain"}],
+    tags:[{label:"3D",cat:"domain"},{label:"UX/UI",cat:"domain"},{label:"Stratégie & Marketing",cat:"domain"},{label:"Unreal Engine 5",cat:"tool"},{label:"Blender",cat:"tool"},{label:"Figma",cat:"tool"},{label:"Photoshop",cat:"tool"}, {label:"PremierPro",cat:"tool"},{label:"Direction artistique",cat:"domain"},{label:"Gestion de projet",cat:"domain"}],
     accent:"#FBBEB4", desc:"Plateforme de Streaming innovanter, immersif, participatic & interactif pour Canal+",
     role:"Project Manager", team:"20 personnes", duration:"2 semaines",
     contexte: "Canal+ cherchait à créer une expérience live immersive pour l'événement de lancement de leur offre jeunesse. Le défi était de concevoir un dispositif 3D interactif utilisable en temps réel par le public.",
